@@ -18,9 +18,14 @@ class ToDoList extends Component{
     }
     add=()=>{
        const inputValue=this.state.inputValue;
+       if(!inputValue){
+           console.log("inputValue can not be empty!");
+           return false;
+       }else{
         this.setState({
-           list:[...this.state.list,inputValue]
-        })
+            list:[...this.state.list,inputValue]
+         })
+       } 
     }
     delete=(index)=>{
        const list=this.state.list;
@@ -28,6 +33,19 @@ class ToDoList extends Component{
        this.setState({
            list:list
        })
+    }
+
+    getToDoItem(){
+     return   this.state.list.map((item,index)=>{
+            return(
+             //    <li key={index} onClick={()=>{this.delete(index)}}>{item}</li>
+             <ToDoItem 
+                 content={item} key={index}
+                 index={index} 
+                 delete={()=>{this.delete(index)}}
+               />
+            )
+        })
     }
     render(){
         return(
@@ -48,14 +66,7 @@ class ToDoList extends Component{
                    />
                </div>
                <ul className="todolist-item">
-                   {
-                       this.state.list.map((item,index)=>{
-                           return(
-                            //    <li key={index} onClick={()=>{this.delete(index)}}>{item}</li>
-                            <ToDoItem content={item} key={index} index={index} delete={()=>{this.delete(index)}} />
-                           )
-                       })
-                   }
+                   {this.getToDoItem()}
                </ul>
             </Fragment>
         )
