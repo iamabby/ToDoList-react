@@ -1,6 +1,6 @@
 import React,{Component,Fragment} from "react";
 import "./ToDoList.scss";
-import ToDoItem from "../ToDoItem";
+import ToDoItem from "./ToDoItem";
 
 
 class ToDoList extends Component{
